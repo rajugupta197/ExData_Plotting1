@@ -20,7 +20,7 @@ unzip(f)
 
 
 ###############################################################
-#### Read the Data File
+#### Read the Data File (The Feb 2007 data comes within 70000 rows, so trucated the rows to make code efficient)
 data1 <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", nrows = 70000)
 
 ## Strip the Date and Time fields and combine them together
