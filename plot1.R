@@ -14,14 +14,17 @@ setwd("D:\\Coursera\\Data Science - Specialization\\04_Exploratory Data Analysis
 
 url <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 f <- "household_power_consumption.zip"
-download.file(url=url,destfile = f, mode = "wb")
+if(!file.exists(f)) {
+    download.file(url=url,destfile = f, mode = "wb")
+}
 
-unzip(f)
-
+if(!file.exists("household_power_consumption.txt")) {
+    unzip(f)
+}
 
 ###############################################################
 #### Read the Data File (The Feb 2007 data comes within 70000 rows, so trucated the rows to make code efficient)
-data1 <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", nrows = 70000)
+data1 <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?", nrows = 70000)
 
 ## Strip the Date and Time fields and combine them together
 DateTime <- strptime(paste(data1$Date, data1$Time), "%e/%m/%Y %H:%M:%S")
